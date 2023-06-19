@@ -127,12 +127,13 @@ function customizeNavigation(e) {
           e.childNodes[1].childNodes[0].nodeValue = getMenuItemInfo(e, "text");
         }
       });
-    }!mobileDevice && slidingMenu && ((pmbHolder = document.createElement("button")).className = "v-btn v-btn--top v-btn--depressed v-btn--fab v-btn--fixed v-btn--left v-btn--round theme--dark v-size--small primary mad-pmb", pmbHolder.type = "button", pmbHolder.insertAdjacentHTML("afterbegin", '<span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi theme--dark ' + icon_pinOff + '" style="transform:rotate(0deg);"></i></span>'), pmb = pmbHolder.querySelector("i"), (mbHolder = document.createElement("button")).className = "v-btn v-btn--top v-btn--depressed v-btn--fab v-btn--fixed v-btn--left v-btn--round theme--dark v-size--small primary mb", mbHolder.type = "button", mbHolder.insertAdjacentHTML("afterbegin", '<span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi theme--dark ' + icon_menu + '"></i></span>'), e.parentNode.insertBefore(mbHolder, e), mb = mbHolder.querySelector("i"), mbHolder.addEventListener("mouseenter", menuOpen), addListeners(e, "mouseenter mouseleave mouseover", navEvent), addListeners(pmbHolder, "mouseleave mouseup", pmbEvent), pinMenu || !0 === isMouseOverNav || setTimeout(function() {
+    }
+    !mobileDevice && slidingMenu && ((pmbHolder = document.createElement("button")).className = "v-btn v-btn--top v-btn--depressed v-btn--fab v-btn--fixed v-btn--left v-btn--round theme--dark v-size--small primary mad-pmb", pmbHolder.type = "button", pmbHolder.insertAdjacentHTML("afterbegin", '<span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi theme--dark ' + icon_pinOff + '" style="transform:rotate(0deg);"></i></span>'), pmb = pmbHolder.querySelector("i"), (mbHolder = document.createElement("button")).className = "v-btn v-btn--top v-btn--depressed v-btn--fab v-btn--fixed v-btn--left v-btn--round theme--dark v-size--small primary mb", mbHolder.type = "button", mbHolder.insertAdjacentHTML("afterbegin", '<span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi theme--dark ' + icon_menu + '"></i></span>'), e.parentNode.insertBefore(mbHolder, e), mb = mbHolder.querySelector("i"), mbHolder.addEventListener("mouseenter", menuOpen), addListeners(e, "mouseenter mouseleave mouseover", navEvent), addListeners(pmbHolder, "mouseleave mouseup", pmbEvent), pinMenu || !0 === isMouseOverNav || setTimeout(function() {
         menuClose()
     }, 100), menuOpening = !1, menuOpened = !0, pinMenu ? (pmb.classList.add(icon_pinOff), menuOpen(), e.classList.add("mad-nav-visible")) : pmb.classList.add(icon_pinOn))
-}
-
-function createNestedSections(element) {
+  }
+  
+  function createNestedSections(element) {
     var sections = [];
     var nestedItems = groupItems(element);
     nestedItems.forEach(function(item) {
@@ -146,7 +147,8 @@ function createNestedSections(element) {
       }
     });
     return sections;
-}
+  }
+  
 
 function customizeMainContent(e) {
     if (breadcrumbs = e.querySelector("header"), removeBreadcrumbs && !breadcrumbsHidden && breadcrumbs && (breadcrumbs.nextSibling && breadcrumbs.nextSibling.remove(), breadcrumbs.remove(), breadcrumbsHidden = !0), sideColumn = e.querySelector("div.flex.page-col-sd.lg3.xl2"))
