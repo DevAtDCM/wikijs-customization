@@ -82,12 +82,24 @@ function customizeHeader(e) {
     }
 }
 
-function customizeNavigation(e) {
+function customizeNavigation(e, level = 0) {
     if (slidingMenu && (e.style.removeProperty ? e.style.removeProperty("transform") : e.style.removeAttribute("transform")), collapsibleMenu) {
-        var t = e.querySelector(".__view").children[0].children[1].childNodes;
-        console.log(t);
-        mobileDevice ? t.forEach(function(e) {
-            e.childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[0]), e.childNodes[1] && e.childNodes[1].childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[1].childNodes[0])
+        // Check if 0 nested elements
+        if (!e.querySelector(".__view").children[level]) {
+            return;
+        }
+
+        var t = e.querySelector(".__view").children[level].children[1].childNodes;
+
+        mobileDevice 
+        ? t.forEach(function(e) {
+            e.childNodes.forEach((child, index) => {
+                fixMobileDeviceNodeValue(child);
+                // Here we recursively call customizeNavigation() on each child element
+                if (child.childNodes.length > 0) {
+                    customizeNavigation(child, level + 1);
+                }
+            });
         }) : (t.forEach(function(e) {
             e.nextElementSibling, e.previousElementSibling;
             var t = e.previousElementSibling;
@@ -99,6 +111,11 @@ function customizeNavigation(e) {
                     sectionState(t.nextElementSibling, "toggle")
                 }, !1)
             }
+
+            if (e.childNodes.length > 0) {
+                customizeNavigation(e, level + 1);
+            }
+
         }), t.forEach(function(e) {
             "HDR" == (menuItemType = getMenuItemType(e)) ? (getMenuItemInfo(e, "icon") && (headerAppendIcon(e, getMenuItemInfo(e, "icon")), e.childNodes[1].nodeValue = getMenuItemInfo(e, "text")), e.childNodes[0].nodeValue = getMenuItemInfo(e, "text")) : "LNK" == menuItemType && (e.childNodes[1].childNodes[0].nodeValue = getMenuItemInfo(e, "text"))
         }))
