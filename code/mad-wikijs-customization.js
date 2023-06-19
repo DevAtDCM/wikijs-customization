@@ -89,7 +89,8 @@ function customizeNavigation(e, level = 0) {
             return;
         }
 
-        var t = e.querySelector(".__view").children[level].children[1].childNodes;
+        var t = e.querySelector(".__view")?.children[level]?.children[1]?.childNodes;
+        if (!t) return;
 
         mobileDevice 
         ? t.forEach(function(e) {
