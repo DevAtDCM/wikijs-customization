@@ -85,69 +85,27 @@ function customizeHeader(e) {
 
 function customizeNavigation(e) {
     if (slidingMenu && (e.style.removeProperty ? e.style.removeProperty("transform") : e.style.removeAttribute("transform")), collapsibleMenu) {
-      var topLevelItems = e.querySelector(".__view").children[0].children[1].childNodes;
-      mobileDevice ? topLevelItems.forEach(function(e) {
-        e.childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[0]);
-        e.childNodes[1] && e.childNodes[1].childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[1].childNodes[0]);
-      }) : topLevelItems.forEach(function(e) {
-        e.nextElementSibling, e.previousElementSibling;
-        var topLevelItem = e.previousElementSibling;
-        if ("DVD" == (menuItemType = getMenuItemType(e)) && hideDivider) {
-          e.style.display = "none";
-        } else if (getMenuItemInfo(e, "level") > getMenuItemInfo(topLevelItem, "level")) {
-          var nestedSections = createNestedSections(e);
-          nestedSections.forEach(function(section) {
-            topLevelItem.classList.add(CM_COLLAPSIBLE, CM_COLLAPSIBLE_INACTIVE);
-            if (sectionContainsActivePage(section)) {
-              topLevelItem.classList.toggle(CM_COLLAPSIBLE_INACTIVE);
-            } else if (topLevelItem.href == curPathAbs) {
-              topLevelItem.classList.add(CM_LNK_ACTIVE2);
-              section.classList.add(CM_SECTION_EXPANDED);
-              topLevelItem.classList.toggle(CM_COLLAPSIBLE_ACTIVE);
-              topLevelItem.classList.toggle(CM_COLLAPSIBLE_INACTIVE);
+        var t = e.querySelector(".__view").children[0].children[1].childNodes;
+        mobileDevice ? t.forEach(function(e) {
+            e.childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[0]), e.childNodes[1] && e.childNodes[1].childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[1].childNodes[0])
+        }) : (t.forEach(function(e) {
+            e.nextElementSibling, e.previousElementSibling;
+            var t = e.previousElementSibling;
+            if ("DVD" == (menuItemType = getMenuItemType(e)) && hideDivider) e.style.display = "none";
+            else if (getMenuItemInfo(e, "level") > getMenuItemInfo(t, "level")) {
+                var n = groupItems(e);
+                n.wrapGroup(CM_SECTION), t.classList.add(CM_COLLAPSIBLE, CM_COLLAPSIBLE_INACTIVE), sectionContainsActivePage(n) ? t.classList.toggle(CM_COLLAPSIBLE_INACTIVE) : t.href == curPathAbs && (t.classList.add(CM_LNK_ACTIVE2), t.nextElementSibling.classList.add(CM_SECTION_EXPANDED), t.classList.toggle(CM_COLLAPSIBLE_ACTIVE), t.classList.toggle(CM_COLLAPSIBLE_INACTIVE)), "HDR" == getMenuItemType(t) && t.addEventListener("click", e => {
+                    e.target;
+                    sectionState(t.nextElementSibling, "toggle")
+                }, !1)
             }
-            if ("HDR" == getMenuItemType(topLevelItem)) {
-              topLevelItem.addEventListener("click", function(e) {
-                e.target;
-                sectionState(section, "toggle");
-              }, false);
-            }
-          });
-        }
-      });
-  
-      topLevelItems.forEach(function(e) {
-        if ("HDR" == (menuItemType = getMenuItemType(e))) {
-          if (getMenuItemInfo(e, "icon")) {
-            headerAppendIcon(e, getMenuItemInfo(e, "icon"));
-            e.childNodes[1].nodeValue = getMenuItemInfo(e, "text");
-          }
-          e.childNodes[0].nodeValue = getMenuItemInfo(e, "text");
-        } else if ("LNK" == menuItemType) {
-          e.childNodes[1].childNodes[0].nodeValue = getMenuItemInfo(e, "text");
-        }
-      });
+        }), t.forEach(function(e) {
+            "HDR" == (menuItemType = getMenuItemType(e)) ? (getMenuItemInfo(e, "icon") && (headerAppendIcon(e, getMenuItemInfo(e, "icon")), e.childNodes[1].nodeValue = getMenuItemInfo(e, "text")), e.childNodes[0].nodeValue = getMenuItemInfo(e, "text")) : "LNK" == menuItemType && (e.childNodes[1].childNodes[0].nodeValue = getMenuItemInfo(e, "text"))
+        }))
     }!mobileDevice && slidingMenu && ((pmbHolder = document.createElement("button")).className = "v-btn v-btn--top v-btn--depressed v-btn--fab v-btn--fixed v-btn--left v-btn--round theme--dark v-size--small primary mad-pmb", pmbHolder.type = "button", pmbHolder.insertAdjacentHTML("afterbegin", '<span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi theme--dark ' + icon_pinOff + '" style="transform:rotate(0deg);"></i></span>'), pmb = pmbHolder.querySelector("i"), (mbHolder = document.createElement("button")).className = "v-btn v-btn--top v-btn--depressed v-btn--fab v-btn--fixed v-btn--left v-btn--round theme--dark v-size--small primary mb", mbHolder.type = "button", mbHolder.insertAdjacentHTML("afterbegin", '<span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi theme--dark ' + icon_menu + '"></i></span>'), e.parentNode.insertBefore(mbHolder, e), mb = mbHolder.querySelector("i"), mbHolder.addEventListener("mouseenter", menuOpen), addListeners(e, "mouseenter mouseleave mouseover", navEvent), addListeners(pmbHolder, "mouseleave mouseup", pmbEvent), pinMenu || !0 === isMouseOverNav || setTimeout(function() {
         menuClose()
     }, 100), menuOpening = !1, menuOpened = !0, pinMenu ? (pmb.classList.add(icon_pinOff), menuOpen(), e.classList.add("mad-nav-visible")) : pmb.classList.add(icon_pinOn))
-  }
-  
-  function createNestedSections(element) {
-    var sections = [];
-    var nestedItems = groupItems(element);
-    nestedItems.forEach(function(item) {
-      if (getMenuItemType(item) == "HDR") {
-        var nestedSections = createNestedSections(item);
-        nestedSections.wrapGroup(CM_SECTION);
-        sections.push(item);
-        sections.push.apply(sections, nestedSections);
-      } else {
-        sections.push(item);
-      }
-    });
-    return sections;
-  }
-  
+}
 
 function customizeMainContent(e) {
     if (breadcrumbs = e.querySelector("header"), removeBreadcrumbs && !breadcrumbsHidden && breadcrumbs && (breadcrumbs.nextSibling && breadcrumbs.nextSibling.remove(), breadcrumbs.remove(), breadcrumbsHidden = !0), sideColumn = e.querySelector("div.flex.page-col-sd.lg3.xl2"))
