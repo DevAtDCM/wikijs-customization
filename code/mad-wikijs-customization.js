@@ -86,6 +86,7 @@ function customizeHeader(e) {
 function customizeNavigation(e) {
     if (slidingMenu && (e.style.removeProperty ? e.style.removeProperty("transform") : e.style.removeAttribute("transform")), collapsibleMenu) {
         var t = e.querySelector(".__view").children[0].children[1].childNodes;
+        console.log(t);
         mobileDevice ? t.forEach(function(e) {
             e.childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[0]), e.childNodes[1] && e.childNodes[1].childNodes[0] && fixMobileDeviceNodeValue(e.childNodes[1].childNodes[0])
         }) : (t.forEach(function(e) {
